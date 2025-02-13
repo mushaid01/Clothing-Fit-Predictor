@@ -31,7 +31,7 @@ Clothing Fit Predictor/
 ## Installation
 ### **Step 1: Clone the Repository**
 ```sh
-git clone <repository-url>
+git clone https://github.com/mushaid01/Clothing-Fit-Predictor.git
 cd Clothing Fit Predictor
 ```
 
