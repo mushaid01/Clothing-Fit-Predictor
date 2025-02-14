@@ -3,6 +3,7 @@
 ## Overview
 The **Clothing Fit Predictor** is a Streamlit-based web application that predicts the fit of clothing based on user inputs such as bust size, weight, height, age, and other relevant factors. It leverages a **Random Forest Classifier** trained on rental clothing data.
 
+Demo: https://clothing-fit-predictor.streamlit.app/
 ---
 
 ## Folder Structure
