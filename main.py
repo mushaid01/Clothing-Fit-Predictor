@@ -3,7 +3,8 @@ import joblib
 import numpy as np
 import pandas as pd
 import plotly.express as px
-
+import requests
+import io
 # Load the model and preprocessing objects
 rf_loaded = joblib.load('Model and Objects/random_forest_model.pkl')
 scaler = joblib.load('Model and Objects/scaler.pkl')
@@ -78,7 +79,18 @@ if page == "Fit Predictor":
         st.success("The prediction is based on your inputs!")
 
 elif page == "Data Insights":
-    df_cleaned = pd.read_csv("Data/cleaned_data.csv")
+    # Google Drive File ID (Extracted from the link)
+    file_id = "1TIS2jac7i7IJqL0h9wxFsqyQoFOqlM4y"
+
+    # Google Drive Direct Download URL
+    download_url = f"https://drive.google.com/uc?export=download&id={file_id}"
+
+    # Send HTTP request to get the file
+    response = requests.get(download_url)
+    response.raise_for_status()  # Raise error if request fails
+
+    # Read the CSV file into a Pandas DataFrame (without saving to disk)
+    df_cleaned = pd.read_csv(io.StringIO(response.text))
     rental_counts = df_cleaned['rented for'].value_counts().reset_index()
     rental_counts.columns = ['rented for', 'count']
     fig3 = px.bar(rental_counts, x='rented for', y='count', title='Count of Rental Reasons', labels={'rented for': 'Rental Reason', 'count': 'Count'}, color='rented for', text='count')
